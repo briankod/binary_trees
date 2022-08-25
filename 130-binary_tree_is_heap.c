@@ -1,20 +1,20 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_height - function that measures the height of a binary tree
+ * binary_tree_height_2 - function that measures the height of a binary tree
  * @tree: a pointer to the root node of the tree to measure the height
  * Return: height
  * If tree is NULL, return 0
  */
-size_t binary_tree_height(const binary_tree_t *tree)
+size_t binary_tree_height_2(const binary_tree_t *tree)
 {
 	size_t left_height, right_height;
 
-	if (!tree || (!tree->left && !tree->right))
+	if (!tree)
 		return (0);
 
-	left_height = binary_tree_height(tree->left);
-	right_height = binary_tree_height(tree->right);
+	left_height = binary_tree_height_2(tree->left);
+	right_height = binary_tree_height_2(tree->right);
 
 	return ((left_height > right_height ? left_height : right_height) + 1);
 }
@@ -33,8 +33,8 @@ int binary_tree_balance(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
-	left_branch = binary_tree_height(tree->left);
-	right_branch = binary_tree_height(tree->right);
+	left_branch = binary_tree_height_2(tree->left);
+	right_branch = binary_tree_height_2(tree->right);
 	return (left_branch - right_branch);
 }
 
@@ -51,8 +51,8 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 		return (0);
 	if (tree->left == NULL && tree->right == NULL)
 		return (1);
-	if (binary_tree_height(tree->left) !=
-			binary_tree_height(tree->right))
+	if (binary_tree_height_2(tree->left) !=
+			binary_tree_height_2(tree->right))
 		return (0);
 	if (binary_tree_is_perfect(tree->left) &&
 			binary_tree_is_perfect(tree->right))
